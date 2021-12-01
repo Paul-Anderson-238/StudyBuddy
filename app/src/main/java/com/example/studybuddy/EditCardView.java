@@ -1,11 +1,14 @@
 package com.example.studybuddy;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.gson.Gson;
 
@@ -16,6 +19,12 @@ import java.util.Scanner;
 public class EditCardView extends AppCompatActivity {
     static final String setlist = "SETLIST";
     CardSet set;
+
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private EditText newFront, newBack;
+    private Button saveButton, cancelButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +58,37 @@ public class EditCardView extends AppCompatActivity {
     public void returnToPrev(View view){
         SharedPreferences sharedPreferences = getSharedPreferences(setlist, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+    }
+
+    public void createNewCard(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View cardPopupView = getLayoutInflater().inflate(R.layout.addcardpopup, null);
+        newFront = (EditText) cardPopupView.findViewById(R.id.newFront);
+        newBack = (EditText) cardPopupView.findViewById(R.id.newBack);
+        saveButton = (Button) cardPopupView.findViewById(R.id.saveButton);
+        cancelButton = (Button) cardPopupView.findViewById(R.id.cancelButton);
+
+        dialogBuilder.setView(cardPopupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editor = (EditText) findViewById(R.id.newFront);
+                String front = editor.getText().toString();
+                editor = (EditText) findViewById(R.id.newBack);
+                String back = editor.getText().toString();
+                set.addCard(front, back);
+                dialog.dismiss();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }

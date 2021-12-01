@@ -8,14 +8,17 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 public class CardSet {
     String id;
     List<Card> cards;
+    ListIterator<Card> it;
 
     public CardSet(String id){
         this.id = id;
         this.cards = new ArrayList<>();
+        it = cards.listIterator();
     }
 
     public List<Card> getCards() {return cards;}

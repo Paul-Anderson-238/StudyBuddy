@@ -23,6 +23,10 @@ public class CardSet {
 
     public List<Card> getCards() {return cards;}
 
+    public int getSize() {return cards.size();}
+
+    public String getId() {return id;}
+
     public void addCard(Card c){cards.add(c);}
 
     public void addCard(String front, String back){
@@ -48,6 +52,13 @@ public class CardSet {
                 return c;
         }
         return null;
+    }
+
+    public Card getCard(int index){
+        if(index < 0 || index > cards.size())
+            return null;
+        else
+            return cards.get(index);
     }
 
     public List<Card> randomizeCards(){

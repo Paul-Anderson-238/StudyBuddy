@@ -14,11 +14,14 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class EditCardView extends AppCompatActivity {
     static final String setlist = "SETLIST";
     CardSet set;
+    Card currentCard;
+    int currentCardIndex;
 
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
@@ -53,11 +56,29 @@ public class EditCardView extends AppCompatActivity {
         else{
             set = gson.fromJson(String.valueOf(set), CardSet.class);
         }
+        currentCardIndex = 0;
+
+        if (set.getSize() == 0){
+
+        }
+        else{
+
+        }
     }
 
-    public void returnToPrev(View view){
-        SharedPreferences sharedPreferences = getSharedPreferences(setlist, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    public void saveSet(View view){
+        //SharedPreferences sharedPreferences = getSharedPreferences(setlist, MODE_PRIVATE);
+        //SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        PrintWriter out = null;
+        try{
+            out = new PrintWriter(set.getId() + ".txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Gson gson = new Gson();
+        out.println(gson.toJson(set));
+        out.close();
     }
 
     public void createNewCard(){

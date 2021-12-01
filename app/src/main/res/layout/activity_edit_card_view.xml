@@ -21,7 +21,7 @@
         android:layout_width="220dp"
         android:layout_height="48dp"
         android:layout_marginBottom="24dp"
-        android:onClick="returnToPrev()"
+        android:onClick="returnToPrev"
         android:text="Return to Card Menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

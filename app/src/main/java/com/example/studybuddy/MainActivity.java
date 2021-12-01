@@ -56,6 +56,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Gson gson = new Gson();
         String string = sharedPreferences.getString(setlist, "");
-        setList = gson.fromJson(string , List.class);
+        setList = gson.fromJson(string, List.class);
     }
     }

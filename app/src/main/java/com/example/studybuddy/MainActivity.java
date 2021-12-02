@@ -17,10 +17,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
-    public List<CardSet> cardSetList;
     private ListView lv_cardSet;
     static final String setlist = "SETLIST";
     private List<String> setList;

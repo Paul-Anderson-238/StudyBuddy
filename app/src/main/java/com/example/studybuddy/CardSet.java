@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 public class CardSet {
     String id;
@@ -19,6 +20,10 @@ public class CardSet {
     }
 
     public List<Card> getCards() {return cards;}
+
+    public int getSize() {return cards.size();}
+
+    public String getId() {return id;}
 
     public void addCard(Card c){cards.add(c);}
 
@@ -39,12 +44,24 @@ public class CardSet {
         out.close();
     }
 
+    public void replace(int index, Card replacement){
+        cards.remove(index);
+        cards.add(index, replacement);
+    }
+
     public Card getCard(String front){
         for(Card c : cards){
             if (c.getFront().equals(front))
                 return c;
         }
         return null;
+    }
+
+    public Card getCard(int index){
+        if(index < 0 || index > cards.size())
+            return null;
+        else
+            return cards.get(index);
     }
 
     public List<Card> randomizeCards(){

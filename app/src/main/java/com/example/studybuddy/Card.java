@@ -3,6 +3,7 @@ package com.example.studybuddy;
 public class Card {
     String front;
     String back;
+    String notes;
 
     public Card(String front, String back){
         this.front = front;

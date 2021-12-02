@@ -14,31 +14,35 @@
         android:text="Add Notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/cardBack" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="220dp"
         android:layout_height="48dp"
         android:layout_marginBottom="24dp"
-        android:onClick="returnToPrev"
-        android:text="Return to Card Menu"
+        android:onClick="saveSet"
+        android:text="Save Changes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="262dp"
-        android:layout_height="276dp"
-        android:layout_marginTop="72dp"
-        android:text="Card"
+    <EditText
+        android:id="@+id/cardBack"
+        android:layout_width="261dp"
+        android:layout_height="159dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:elegantTextHeight="false"
+        android:text="Card Back"
         android:textAlignment="center"
-        android:textSize="60sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/cardFront" />
 
     <Button
         android:id="@+id/button2"
@@ -48,7 +52,7 @@
         android:layout_marginEnd="16dp"
         android:text="Edit"
         app:layout_constraintEnd_toStartOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/cardBack" />
 
     <Button
         android:id="@+id/button5"
@@ -58,7 +62,7 @@
         android:layout_marginTop="24dp"
         android:text="Delete"
         app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/cardBack" />
 
     <TextView
         android:id="@+id/setName"
@@ -73,9 +77,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="140dp"
-        android:layout_height="45dp"
+        android:id="@+id/cardNumber"
+        android:layout_width="142dp"
+        android:layout_height="30dp"
         android:layout_marginTop="24dp"
         android:text="Card Number"
         android:textAlignment="center"
@@ -84,4 +88,51 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setName" />
+
+    <Button
+        android:id="@+id/addCardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="createNewCard"
+        android:text="Add New Card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+    <EditText
+        android:id="@+id/cardFront"
+        android:layout_width="260dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="Card Front"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardNumber" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:onClick="nextCard"
+        android:text="Next"
+        app:layout_constraintBottom_toTopOf="@+id/cardBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardFront" />
+
+    <Button
+        android:id="@+id/prevButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:onClick="prevCard"
+        android:text="Prev"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardFront" />
 </androidx.constraintlayout.widget.ConstraintLayout>

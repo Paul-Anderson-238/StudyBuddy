@@ -13,12 +13,10 @@ import java.util.ListIterator;
 public class CardSet {
     String id;
     List<Card> cards;
-    ListIterator<Card> it;
 
     public CardSet(String id){
         this.id = id;
         this.cards = new ArrayList<>();
-        it = cards.listIterator();
     }
 
     public List<Card> getCards() {return cards;}
@@ -44,6 +42,11 @@ public class CardSet {
         }
         out.println(gson.toJson(this));
         out.close();
+    }
+
+    public void replace(int index, Card replacement){
+        cards.remove(index);
+        cards.add(index, replacement);
     }
 
     public Card getCard(String front){

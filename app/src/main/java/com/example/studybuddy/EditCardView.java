@@ -61,14 +61,20 @@ public class EditCardView extends AppCompatActivity {
         else{
             set = gson.fromJson(String.valueOf(set), CardSet.class);
         }
-        //defaults the view to the current card.
+        //defaults the view to the current card. displays proper set name
         currentCardIndex = 0;
+        TextView text = (TextView) findViewById(R.id.setName);
+        text.setText(setName);
 
+        //displays the first card if there is a first card
         if (set.getSize() > 0){
-
-        }
-        else{
-
+            Card temp = set.getCard(currentCardIndex);
+            EditText edit = (EditText) findViewById(R.id.cardFront);
+            edit.setText(temp.getFront());
+            edit = (EditText) findViewById(R.id.cardBack);
+            edit.setText(temp.getBack());
+            text = (TextView) findViewById(R.id.cardNumber);
+            text.setText(currentCardIndex+1);
         }
     }
 

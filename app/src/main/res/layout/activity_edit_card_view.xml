@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardBack" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/setName"
         android:layout_width="240dp"
         android:layout_height="49dp"
         android:layout_marginTop="16dp"
@@ -84,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/setName" />
 
     <EditText
         android:id="@+id/cardFront"

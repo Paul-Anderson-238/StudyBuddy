@@ -20,7 +20,6 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     private ListView lv_cardSet;
-    static final String setlist = "SETLIST";
     private List<String> setList;
 
     @Override
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public void loadList(){
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Gson gson = new Gson();
-        String string = sharedPreferences.getString(setlist, "");
+        String string = sharedPreferences.getString("SETLIST", "");
         setList = gson.fromJson(string, List.class);
     }
     }

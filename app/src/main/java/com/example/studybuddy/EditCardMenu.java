@@ -37,7 +37,7 @@ public class EditCardMenu extends AppCompatActivity {
     public void loadList(){
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Gson gson = new Gson();
-        String string = sharedPreferences.getString(setName, "");
+        String string = sharedPreferences.getString( "SETLIST", "" );
         setList = gson.fromJson(string, List.class);
     }
 

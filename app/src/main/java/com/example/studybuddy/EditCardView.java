@@ -49,9 +49,9 @@ public class EditCardView extends AppCompatActivity {
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        while(input.hasNext()){
-            cards = input.nextLine();
-        }
+        //while(input.hasNext()){
+            //cards = input.nextLine();
+        //}
 
         //If the set doesn't currently exist
         if(cards == null){

@@ -12,7 +12,6 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class EditCardMenu extends AppCompatActivity {
@@ -34,7 +33,7 @@ public class EditCardMenu extends AppCompatActivity {
         loadList();
     }
 
-    public void loadList(){
+    public void loadList() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Gson gson = new Gson();
         String string = sharedPreferences.getString( "SETLIST", "" );
@@ -42,16 +41,13 @@ public class EditCardMenu extends AppCompatActivity {
     }
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
-    public void editSet(View view){
+    public void editSet(View view) {
         Intent intent = new Intent(this, EditCardView.class);
         intent.putExtra("setname", (String) setName);
         startActivity(intent);
     }
 
-    //Add a New Set
-    public void newSet(View view) {
-        Intent intent = new Intent(this, EditCardView.class);
-        dialogBuilder = new AlertDialog.Builder(this);
+    public void createNewSet(View view) {
         final View newSetPopupView = getLayoutInflater().inflate(R.layout.newsetpopup, null);
         newSetName = (EditText) findViewById(R.id.newSetName);
         saveNewSet = (Button) findViewById(R.id.saveNewSet);
@@ -60,16 +56,20 @@ public class EditCardMenu extends AppCompatActivity {
         dialog = dialogBuilder.create();
         dialog.show();
 
-
         saveNewSet.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                EditText editor = (EditText) findViewById(R.id.newSetName);
-                setName = editor.getText().toString();
-                dialog.dismiss();
+                public void onClick(View v) {
+                    EditText editor = (EditText) findViewById(R.id.newSetName);
+                    setName = editor.getText().toString();
+                    dialog.dismiss();
             }
         });
-        intent.putExtra("setname", (String) setName);
-        startActivity(intent);
     }
+
+    //Add a New Set
+    //public void newSet(View view) {
+        //Intent intent = new Intent(this, EditCardView.class);
+        //intent.putExtra("setname", (String) setName);
+        //startActivity(intent);
+    //}
 }

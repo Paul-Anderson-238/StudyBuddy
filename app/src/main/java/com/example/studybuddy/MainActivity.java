@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     //
     public void EditSet(View view){
         Intent intent = new Intent(this, EditCardMenu.class);
-        intent.putExtra("SETLIST", (Serializable) setList);
         startActivity(intent);
     }
 

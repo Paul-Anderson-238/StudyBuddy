@@ -31,7 +31,14 @@ public class EditCardMenu extends AppCompatActivity {
         setContentView(R.layout.activity_edit_card_menu);
 
         Intent intent = getIntent();
-        setList = (List<String>) intent.getSerializableExtra("SETLIST");
+        loadList();
+    }
+
+    public void loadList(){
+        SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String string = sharedPreferences.getString(setName, "");
+        setList = gson.fromJson(string, List.class);
     }
 
     //Create shared preferences for the name of lists
@@ -39,7 +46,7 @@ public class EditCardMenu extends AppCompatActivity {
        SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Gson gson = new Gson();
         String string = sharedPreferences.getString(setName, "setname");
-        setList = gson.fromJson(string, List.class);
+        setName = gson.fromJson(string, String.class);
     }
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.

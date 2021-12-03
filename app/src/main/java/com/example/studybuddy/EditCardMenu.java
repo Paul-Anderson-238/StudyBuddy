@@ -41,14 +41,6 @@ public class EditCardMenu extends AppCompatActivity {
         setList = gson.fromJson(string, List.class);
     }
 
-    //Create shared preferences for the name of lists
-    public void listName(View view) {
-       SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String string = sharedPreferences.getString(setName, "setname");
-        setName = gson.fromJson(string, String.class);
-    }
-
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
     public void editSet(View view){
         Intent intent = new Intent(this, EditCardView.class);

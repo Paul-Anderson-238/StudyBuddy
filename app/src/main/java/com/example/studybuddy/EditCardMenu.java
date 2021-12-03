@@ -67,6 +67,7 @@ public class EditCardMenu extends AppCompatActivity {
             public void onClick(View v) {
                 EditText editor = (EditText) findViewById(R.id.newSetName);
                 setName = editor.getText().toString();
+                dialog.dismiss();
             }
         });
     }

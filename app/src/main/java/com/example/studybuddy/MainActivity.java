@@ -29,21 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         loadList();
     }
-    // public void loadSets(View view) {
-    //     SharedPreferences sharedPref = getSharedPreferences("cardSetList.txt", Context.MODE_PRIVATE);
-    //
-    //     File txt = new File("cardSetList.txt");
-    //     Scanner scan = new Scanner(txt);
-    //     ArrayList<String> data = new ArrayList<String>() ;
-    //     while(scan.hasNextLine()){
-    //         data.add(scan.nextLine());
-    //     }
-    //
-    //     String[] simpleArray = data.toArray(new String[]{});
-    //
-    //     ArrayAdapter<retrieveSet> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cardSet.getCardSet());
-    //     lv_cardSet.setAdapter(adapter);
-    //
+
+    public void displaySet(){
+        setContentView(R.layout.activity_main);
+        lv_cardSet = (ListView) findViewById(R.id.cardSets);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, setList);
+        lv_cardSet.setAdapter(adapter);
+    }
+
     public void EditSet(View view){
         Intent intent = new Intent(this, EditCardMenu.class);
         startActivity(intent);

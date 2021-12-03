@@ -44,14 +44,14 @@ public class EditCardMenu extends AppCompatActivity {
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
     public void editSet(View view){
-        Intent intent = new Intent(this, EditCardMenu.class);
-        intent.putExtra("setname", (Serializable) setName);
+        Intent intent = new Intent(this, EditCardView.class);
+        intent.putExtra("setname", (String) setName);
         startActivity(intent);
     }
 
     //Add a New Set
     public void newSet(View view) {
-        Intent intent = new Intent(this, EditCardMenu.class);
+        Intent intent = new Intent(this, EditCardView.class);
         dialogBuilder = new AlertDialog.Builder(this);
         final View newSetPopupView = getLayoutInflater().inflate(R.layout.newsetpopup, null);
         newSetName = (EditText) findViewById(R.id.newSetName);
@@ -70,5 +70,7 @@ public class EditCardMenu extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        intent.putExtra("setname", (String) setName);
+        startActivity(intent);
     }
 }

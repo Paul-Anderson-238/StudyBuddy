@@ -13,9 +13,11 @@
             android:name=".QuizView"
             android:exported="false" />
         <activity
+            android:parentActivityName=".EditCardMenu"
             android:name=".EditCardView"
             android:exported="false" />
         <activity
+            android:parentActivityName=".MainActivity"
             android:name=".EditCardMenu"
             android:exported="false" />
         <activity

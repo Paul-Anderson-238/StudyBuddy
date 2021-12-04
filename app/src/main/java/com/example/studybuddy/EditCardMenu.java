@@ -12,6 +12,8 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class EditCardMenu extends AppCompatActivity {
@@ -61,8 +63,24 @@ public class EditCardMenu extends AppCompatActivity {
                 public void onClick(View v) {
                     EditText editor = (EditText) findViewById(R.id.newSetName);
                     setName = editor.getText().toString();
+
+                    //create an empty file for the new set
+                    Gson gson = new Gson();
+                    PrintWriter out = null;
+                    try{
+                        out = new PrintWriter(setName + ".txt");
+                    } catch (FileNotFoundException e){
+                        e.printStackTrace();
+                    }
+                    out.println("");
+                    out.close();
+
+                    //add the new setName to the List of setnames
+                    setList.add(setName);
+                    //TODO update the sharedpreferences with the new list
+
                     dialog.dismiss();
-            }
+                }
         });
     }
 

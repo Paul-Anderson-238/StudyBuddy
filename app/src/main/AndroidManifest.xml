@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyBuddy">
         <activity
+            android:name=".QuizView"
+            android:exported="false" />
+        <activity
             android:name=".EditCardView"
             android:exported="false" />
         <activity

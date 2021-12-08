@@ -33,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadList();
+        displaySet(setList);
     }
 
-    public void displaySet(){
+    public void displaySet(List<String> setList){
         setContentView(R.layout.activity_main);
         lv_cardSet = (ListView) findViewById(R.id.cardSets);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, setList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.setList);
         lv_cardSet.setAdapter(adapter);
     }
 
@@ -52,5 +53,9 @@ public class MainActivity extends AppCompatActivity {
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
         for (String x : set)
             setList.add(x);
+    }
+    public void Quiz(View view){
+        Intent intent = new Intent(this, QuizView.class);
+        startActivity(intent);
     }
     }

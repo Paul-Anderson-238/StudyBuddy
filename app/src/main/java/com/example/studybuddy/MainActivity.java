@@ -1,5 +1,7 @@
 package com.example.studybuddy;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -15,8 +17,12 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private ListView lv_cardSet;
@@ -43,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadList(){
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String string = sharedPreferences.getString("SETLIST", "");
-        setList = gson.fromJson(string, List.class);
+        Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
+        for (String x : set)
+            setList.add(x);
     }
     }

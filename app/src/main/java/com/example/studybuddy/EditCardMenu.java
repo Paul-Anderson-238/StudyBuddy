@@ -9,52 +9,53 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.lang.ref.WeakReference;
+import java.util.HashSet;
 import java.util.Set;
 
 public class EditCardMenu extends AppCompatActivity {
     Set<String> setList;
-    public String setName;
+    String setName;
     SharedPreferences sharedpreferences;
 
     //data for creating a popup screen
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
-    private EditText newSetName;
-    private Button saveNewSet;
+    AlertDialog.Builder dialogBuilder;
+    AlertDialog dialog;
+    EditText newSetName;
+    Button saveNewSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card_menu);
-
-        Intent intent = getIntent();
         loadList();
     }
 
     public void loadList() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String string = sharedPreferences.getString( "SETLIST", "" );
-        setList = gson.fromJson(string, Set.class);
+        setList = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
     }
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
     public void editSet(View view) {
         Intent intent = new Intent(this, EditCardView.class);
-        intent.putExtra("setname", (String) setName);
+        intent.putExtra("setname", setName);
         startActivity(intent);
     }
 
     public void createNewSet(View view) {
+        dialogBuilder = new AlertDialog.Builder(this);
         final View newSetPopupView = getLayoutInflater().inflate(R.layout.newsetpopup, null);
-        newSetName = (EditText) findViewById(R.id.newSetName);
-        saveNewSet = (Button) findViewById(R.id.saveNewSet);
+        newSetName = newSetPopupView.findViewById(R.id.newSetNameText);
+        saveNewSet = newSetPopupView.findViewById(R.id.saveNewSetButton);
 
         dialogBuilder.setView(newSetPopupView);
         dialog = dialogBuilder.create();
@@ -63,19 +64,30 @@ public class EditCardMenu extends AppCompatActivity {
         saveNewSet.setOnClickListener(new View.OnClickListener(){
             @Override
                 public void onClick(View v) {
-                    EditText editor = (EditText) findViewById(R.id.newSetName);
+                    EditText editor = newSetPopupView.findViewById(R.id.newSetNameText);
                     setName = editor.getText().toString();
+                    String filename = setName + ".txt";
 
-                    //create an empty file for the new set
-                    Gson gson = new Gson();
-                    PrintWriter out = null;
+                    FileOutputStream fos = null;
+
                     try{
-                        out = new PrintWriter(setName + ".txt");
-                    } catch (FileNotFoundException e){
+                        fos = openFileOutput(filename, MODE_PRIVATE);
+                        fos.write("".getBytes());
+                        Toast.makeText(getApplicationContext(), "Saved to " + getFilesDir() + "/" + filename, Toast.LENGTH_LONG).show();
+
+                    } catch (FileNotFoundException e) {
                         e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }finally{
+                        if (fos != null){
+                            try {
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
-                    out.println("");
-                    out.close();
 
                     //add the new setName to the List of setnames
                     setList.add(setName);
@@ -84,10 +96,42 @@ public class EditCardMenu extends AppCompatActivity {
                     sharedpreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
                     SharedPreferences.Editor edit = sharedpreferences.edit();
                     edit.putStringSet("SETLIST", setList);
+                    edit.commit();
 
                     dialog.dismiss();
+
+                    TextView temp = findViewById(R.id.currentSet);
+                    temp.setText(setName);
                 }
         });
+    }
+
+    public void dismissal(View view){
+        EditText ed = findViewById(R.id.newSetNameText);
+        setName = ed.getText().toString();
+
+        //create an empty file for the new set
+        if (!setName.equals("")) {
+            PrintWriter out = null;
+
+            try {
+                out = new PrintWriter(setName + ".txt");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            out.println("text");
+            out.close();
+
+            //add the new setName to the List of setnames
+            setList.add(setName);
+
+            //update the shared preferences
+            sharedpreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
+            SharedPreferences.Editor edit = sharedpreferences.edit();
+            edit.putStringSet("SETLIST", setList);
+            edit.commit();
+        }
+        dialog.dismiss();
     }
 
     //Add a New Set

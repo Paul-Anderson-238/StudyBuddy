@@ -15,10 +15,12 @@ import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 
 public class EditCardMenu extends AppCompatActivity {
-    List<String> setList;
+    Set<String> setList;
     public String setName;
+    SharedPreferences sharedpreferences;
 
     //data for creating a popup screen
     private AlertDialog.Builder dialogBuilder;
@@ -39,7 +41,7 @@ public class EditCardMenu extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Gson gson = new Gson();
         String string = sharedPreferences.getString( "SETLIST", "" );
-        setList = gson.fromJson(string, List.class);
+        setList = gson.fromJson(string, Set.class);
     }
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
@@ -77,7 +79,11 @@ public class EditCardMenu extends AppCompatActivity {
 
                     //add the new setName to the List of setnames
                     setList.add(setName);
-                    //TODO update the sharedpreferences with the new list
+
+                    //update the shared preferences
+                    sharedpreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
+                    SharedPreferences.Editor edit = sharedpreferences.edit();
+                    edit.putStringSet("SETLIST", setList);
 
                     dialog.dismiss();
                 }

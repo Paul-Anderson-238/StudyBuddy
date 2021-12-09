@@ -6,4 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".QuizView">
 
+    <Button
+        android:id="@+id/cNext"
+        android:layout_width="40dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="174dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="511dp"
+        android:onClick="nextCard"
+        android:text=">"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cFront"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cFront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="528dp"
+        android:onClick="flipCard"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="247dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="301dp"
+        android:onClick="mainMenu"
+        android:text="Main Menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cNext" />
+
+    <Button
+        android:id="@+id/removeCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="43dp"
+        android:onClick="removeCard"
+        android:text="Remove"
+        app:layout_constraintBottom_toTopOf="@+id/cMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cFront" />
+
+    <TextView
+        android:id="@+id/numberOfCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginBottom="339dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/cMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="386dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginBottom="297dp"
+        android:text="Hint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cMain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

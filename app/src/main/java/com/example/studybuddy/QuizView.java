@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -21,14 +22,18 @@ public class QuizView extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
 
-        //Parse through each set to make it a clickable quiz
-
-        //Make sure the set has at least 1 card and display the front if it does
+        //Make sure the set has at least 1 card and display the front
         if (set.getSize() > 0){
             Card front = set.getCard(currentCardIndex);
             TextView text = (TextView) findViewById(R.id.cardFront);
             text.setText(currentCardIndex+1);
         }
+
+    }
+    public void nextCard(View view){
+
+    }
+    public void removeCard(View view){
 
     }
 

@@ -61,16 +61,17 @@ public class EditCardMenu extends AppCompatActivity {
         dialog = dialogBuilder.create();
         dialog.show();
 
-        saveNewSet.setOnClickListener(new View.OnClickListener(){
+        saveNewSet.setOnClickListener(new View.OnClickListener() {
             @Override
-                public void onClick(View v) {
-                    EditText editor = newSetPopupView.findViewById(R.id.newSetNameText);
-                    setName = editor.getText().toString();
-                    String filename = setName + ".txt";
+            public void onClick(View v) {
+                EditText editor = newSetPopupView.findViewById(R.id.newSetNameText);
+                setName = editor.getText().toString();
+                String filename = setName + ".txt";
 
-                    FileOutputStream fos = null;
+                FileOutputStream fos = null;
 
-                    try{
+                if (!setName.equals("")) {
+                    try {
                         fos = openFileOutput(filename, MODE_PRIVATE);
                         fos.write("".getBytes());
                         Toast.makeText(getApplicationContext(), "Saved to " + getFilesDir() + "/" + filename, Toast.LENGTH_LONG).show();
@@ -79,8 +80,8 @@ public class EditCardMenu extends AppCompatActivity {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }finally{
-                        if (fos != null){
+                    } finally {
+                        if (fos != null) {
                             try {
                                 fos.close();
                             } catch (IOException e) {
@@ -97,41 +98,14 @@ public class EditCardMenu extends AppCompatActivity {
                     SharedPreferences.Editor edit = sharedpreferences.edit();
                     edit.putStringSet("SETLIST", setList);
                     edit.commit();
-
-                    dialog.dismiss();
-
-                    TextView temp = findViewById(R.id.currentSet);
-                    temp.setText(setName);
                 }
-        });
-    }
 
-    public void dismissal(View view){
-        EditText ed = findViewById(R.id.newSetNameText);
-        setName = ed.getText().toString();
+                dialog.dismiss();
 
-        //create an empty file for the new set
-        if (!setName.equals("")) {
-            PrintWriter out = null;
-
-            try {
-                out = new PrintWriter(setName + ".txt");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                TextView temp = findViewById(R.id.currentSet);
+                temp.setText(setName);
             }
-            out.println("text");
-            out.close();
-
-            //add the new setName to the List of setnames
-            setList.add(setName);
-
-            //update the shared preferences
-            sharedpreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
-            SharedPreferences.Editor edit = sharedpreferences.edit();
-            edit.putStringSet("SETLIST", setList);
-            edit.commit();
-        }
-        dialog.dismiss();
+        });
     }
 
     //Add a New Set

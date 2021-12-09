@@ -4,22 +4,25 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class EditCardView extends AppCompatActivity {
     static final String setlist = "SETLIST";
+    String filename;
     CardSet set;
     Card currentCard;
     int currentCardIndex;
@@ -39,28 +42,52 @@ public class EditCardView extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
 
+
         //decodes the incoming Json into a Cardset, or nothing if the file doesn't exist
         String cards = null;
         String setName = intent.getStringExtra("setname");
-        File inputFile = new File(setName + ".txt");
-        Scanner input = null;
-        try{
-            input = new Scanner(inputFile);
-        }catch (FileNotFoundException e) {
+
+        //Displays the name of the set
+        TextView t = findViewById(R.id.setName);
+        t.setText(setName);
+
+        //Begins decoding the file
+        filename = setName + ".txt";
+
+        FileInputStream fis = null;
+
+        try {
+            fis = openFileInput(filename);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String inputFromFile;
+
+            while((inputFromFile = br.readLine()) != null){
+                sb.append(inputFromFile);
+            }
+
+            set = gson.fromJson(inputFromFile, CardSet.class);
+
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        while(input.hasNext()){
-            cards = input.nextLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null){
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         //If the set doesn't currently exist
         if(cards == null){
             set = new CardSet(setName);
         }
-        //Sets our temporary set to the incoming set
-        else{
-            set = gson.fromJson(String.valueOf(set), CardSet.class);
-        }
+
         //defaults the view to the current card. displays proper set name
         currentCardIndex = 0;
         TextView text = (TextView) findViewById(R.id.setName);
@@ -73,8 +100,6 @@ public class EditCardView extends AppCompatActivity {
             edit.setText(temp.getFront());
             edit = (EditText) findViewById(R.id.cardBack);
             edit.setText(temp.getBack());
-            text = (TextView) findViewById(R.id.cardNumber);
-            text.setText(currentCardIndex+1);
         }
     }
 
@@ -94,12 +119,8 @@ public class EditCardView extends AppCompatActivity {
             currentCardIndex = 0;
 
         //set the display to the current card
-        Card temp = set.getCard(currentCardIndex);
-        editor = (EditText) findViewById(R.id.cardFront);
-        editor.setText(temp.getFront());
-        editor = (EditText) findViewById(R.id.cardBack);
-        TextView edit = (TextView) findViewById(R.id.cardNumber);
-        edit.setText(currentCardIndex+1);
+        currentCard = set.getCard(currentCardIndex);
+        displayCard();
     }
 
     public void prevCard(View view){
@@ -118,27 +139,32 @@ public class EditCardView extends AppCompatActivity {
             currentCardIndex--;
 
         //set the display to the current card
-        Card temp = set.getCard(currentCardIndex);
-        editor = (EditText) findViewById(R.id.cardFront);
-        editor.setText(temp.getFront());
-        editor = (EditText) findViewById(R.id.cardBack);
-        TextView edit = (TextView) findViewById(R.id.cardNumber);
-        edit.setText(currentCardIndex+1);
+        currentCard = set.getCard(currentCardIndex);
+        displayCard();
     }
 
     public void saveSet(View view){
-        //SharedPreferences sharedPreferences = getSharedPreferences(setlist, MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPreferences.edit();
+        FileOutputStream fos = null;
+        Gson gson = new Gson();
+        String saveData = gson.toJson(set);
+        try {
+            fos = openFileOutput(filename, MODE_PRIVATE);
+            fos.write(saveData.getBytes());
+            Toast.makeText(getApplicationContext(), "Saved to " + getFilesDir() + "/" + filename, Toast.LENGTH_LONG).show();
 
-        PrintWriter out = null;
-        try{
-            out = new PrintWriter(set.getId() + ".txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        Gson gson = new Gson();
-        out.println(gson.toJson(set));
-        out.close();
     }
 
     public void createNewCard(View view){
@@ -158,12 +184,17 @@ public class EditCardView extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editor = (EditText) findViewById(R.id.newFront);
+                EditText editor = (EditText) cardPopupView.findViewById(R.id.newFront);
                 String front = editor.getText().toString();
-                editor = (EditText) findViewById(R.id.newBack);
+                editor = (EditText) cardPopupView.findViewById(R.id.newBack);
                 String back = editor.getText().toString();
                 set.addCard(front, back);
+                Toast.makeText(getApplicationContext(), "Saved Card", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
+
+                currentCard = set.getCard(set.getSize()-1);
+                currentCardIndex = set.getSize()-1;
+                displayCard();
             }
         });
 
@@ -174,5 +205,12 @@ public class EditCardView extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    void displayCard(){
+        EditText e = findViewById(R.id.cardFront);
+        e.setText(currentCard.getFront());
+        e = findViewById(R.id.cardBack);
+        e.setText(currentCard.getBack());
     }
 }

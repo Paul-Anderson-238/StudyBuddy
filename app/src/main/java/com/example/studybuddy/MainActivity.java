@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadList();
-        displaySet(setList);
+        //displaySet(setList);
     }
 
     public void displaySet(List<String> setList){

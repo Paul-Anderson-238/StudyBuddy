@@ -12,19 +12,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class EditCardMenu extends AppCompatActivity {
-    Set<String> setList;
+    List<String> setList;
     String setName;
     SharedPreferences sharedpreferences;
+    int displayIndex;
 
     //data for creating a popup screen
     AlertDialog.Builder dialogBuilder;
@@ -37,11 +37,20 @@ public class EditCardMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card_menu);
         loadList();
+        displayIndex = 0;
+        if(setList == null)
+            setList = new ArrayList<>();
+        if(setList.size() != 0){
+            setName = setList.get(displayIndex);
+            TextView t = findViewById(R.id.currentSet);
+            t.setText(setName);
+        }
     }
 
     public void loadList() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
-        setList = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
+        Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
+        setList.addAll(set);
     }
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
@@ -96,8 +105,13 @@ public class EditCardMenu extends AppCompatActivity {
                     //update the shared preferences
                     sharedpreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
                     SharedPreferences.Editor edit = sharedpreferences.edit();
-                    edit.putStringSet("SETLIST", setList);
-                    edit.commit();
+                    setList.add(setName);
+
+                    Set<String> s = new HashSet<>();
+                    s.addAll(setList);
+
+                    edit.putStringSet("SETLIST", s);
+                    edit.apply();
                 }
 
                 dialog.dismiss();
@@ -108,10 +122,23 @@ public class EditCardMenu extends AppCompatActivity {
         });
     }
 
-    //Add a New Set
-    //public void newSet(View view) {
-        //Intent intent = new Intent(this, EditCardView.class);
-        //intent.putExtra("setname", (String) setName);
-        //startActivity(intent);
-    //}
+    public void prevSetName(View view){
+        if(displayIndex == 0)
+            displayIndex = setList.size()-1;
+        else if(setList.size()!= 1)
+            displayIndex--;
+        setName = setList.get(displayIndex);
+        TextView t = findViewById(R.id.currentSet);
+        t.setText(setName);
+    }
+
+    public void nextSetName(View view){
+        if(displayIndex == setList.size()-1)
+            displayIndex = 0;
+        else if(setList.size() != 1)
+            displayIndex++;
+        setName = setList.get(displayIndex);
+        TextView t = findViewById(R.id.currentSet);
+        t.setText(setName);
+    }
 }

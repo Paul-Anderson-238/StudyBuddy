@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,9 +25,6 @@ public class EditCardView extends AppCompatActivity {
     CardSet set;
     Card currentCard;
     int currentCardIndex;
-
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +83,9 @@ public class EditCardView extends AppCompatActivity {
         //displays the first card if there is a first card
         if (set.getSize() > 0){
             currentCard = set.getCard(currentCardIndex);
-            EditText edit = (EditText) findViewById(R.id.cardFront);
+            EditText edit = findViewById(R.id.cardFront);
             edit.setText(currentCard.getFront());
-            edit = (EditText) findViewById(R.id.cardBack);
+            edit = findViewById(R.id.cardBack);
             edit.setText(currentCard.getBack());
         }
     }
@@ -157,13 +153,13 @@ public class EditCardView extends AppCompatActivity {
 
     public void createNewCard(View view){
         //Code for creating a Popup window to add a new card. The dialog stuff creates the view
-        dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         final View cardPopupView = getLayoutInflater().inflate(R.layout.addcardpopup, null);
         Button saveButton = cardPopupView.findViewById(R.id.saveButton);
         Button cancelButton = cardPopupView.findViewById(R.id.cancelButton);
 
         dialogBuilder.setView(cardPopupView);
-        dialog = dialogBuilder.create();
+        AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
         //Saves the new card

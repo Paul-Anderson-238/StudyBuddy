@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import java.util.Set;
 public class EditCardMenu extends AppCompatActivity {
     List<String> setList;
     String setName;
-    SharedPreferences sharedpreferences;
     int displayIndex;
 
     //data for creating a popup screen
@@ -99,7 +97,7 @@ public class EditCardMenu extends AppCompatActivity {
                     setList.add(setName);
 
                     //update the shared preferences
-                    sharedpreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
+                    SharedPreferences sharedpreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
                     SharedPreferences.Editor edit = sharedpreferences.edit();
                     setList.add(setName);
 

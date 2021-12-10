@@ -10,16 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyBuddy">
         <activity
+            android:name=".QuizMenu"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuizView"
             android:exported="false" />
         <activity
-            android:parentActivityName=".EditCardMenu"
             android:name=".EditCardView"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".EditCardMenu" />
         <activity
-            android:parentActivityName=".MainActivity"
             android:name=".EditCardMenu"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

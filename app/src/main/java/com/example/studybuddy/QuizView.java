@@ -20,21 +20,20 @@ public class QuizView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_view);
 
-
-        //Name of Set we'll need from the incoming intent to read each card in the list
+//Name of Set we'll need from the incoming intent to read each card in the list
         Intent intent = getIntent();
         Gson gson = new Gson();
 
         //Make sure the set has at least 1 card and display the front
         if (set.getSize() > 0){
             Card front = set.getCard(currentCardIndex);
-            TextView text = (TextView) findViewById(R.id.cFront);
-            text.setText(currentCardIndex);
+            TextView text = (TextView) findViewById(R.id.numberOfCards);
+            text.setText((currentCardIndex + 1) + "/" + (set.getSize()));
         }
 
     }
     public void nextCard(View view){
-        currentCard = set.getCard(currentCardIndex);
+        currentCard = set.getCard(currentCardIndex + 1);
         displayCard();
     }
     public void removeCard(View view){
@@ -47,4 +46,4 @@ public class QuizView extends AppCompatActivity {
     public void flipCard(){
 
     }
-}
+    }

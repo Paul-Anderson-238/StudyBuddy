@@ -23,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadList();
-        //displaySet(setList);
+        displaySet();
+
     }
 
-    public void displaySet(List<String> setList){
+    public void displaySet(){
         setContentView(R.layout.activity_main);
         lv_cardSet = (ListView) findViewById(R.id.cardSets);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.setList);
@@ -41,10 +42,8 @@ public class MainActivity extends AppCompatActivity {
     public void loadList(){
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
-        if (set.size() != 0)
-            setList.addAll(set);
-        else
-            setList = new ArrayList<>();
+        setList = new ArrayList<>(set);
+
     }
     public void Quiz(View view){
         Intent intent = new Intent(this, QuizView.class);

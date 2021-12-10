@@ -48,10 +48,7 @@ public class EditCardMenu extends AppCompatActivity {
     public void loadList() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
-        if (set != null)
-            setList.addAll(set);
-        else
-            setList = new ArrayList<>();
+        setList = new ArrayList<>(set);
     }
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
@@ -86,8 +83,6 @@ public class EditCardMenu extends AppCompatActivity {
                         fos.write("".getBytes());
                         Toast.makeText(getApplicationContext(), "Saved to " + getFilesDir() + "/" + filename, Toast.LENGTH_LONG).show();
 
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {

@@ -56,13 +56,11 @@ public class EditCardView extends AppCompatActivity {
             String inputFromFile;
 
             while((inputFromFile = br.readLine()) != null){
-                sb.append(inputFromFile);
+                sb.append(inputFromFile).append("\n");
             }
 
-            set = gson.fromJson(inputFromFile, CardSet.class);
+            set = gson.fromJson(sb.toString(), CardSet.class);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -76,7 +74,7 @@ public class EditCardView extends AppCompatActivity {
         }
 
         //If the set doesn't currently exist
-        if(set.getSize() == 0)
+        if(set == null)
             set = new CardSet(setName);
 
         //sets the currentCardIndex to 0, starts on the first card if it exists
@@ -140,9 +138,6 @@ public class EditCardView extends AppCompatActivity {
             fos = openFileOutput(filename, MODE_PRIVATE);
             fos.write(saveData.getBytes());
             Toast.makeText(getApplicationContext(), "Saved to " + getFilesDir() + "/" + filename, Toast.LENGTH_LONG).show();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public void loadList(){
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
-        if (set != null)
+        if (set.size() != 0)
             setList.addAll(set);
         else
             setList = new ArrayList<>();

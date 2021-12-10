@@ -57,6 +57,11 @@ public class CardSet {
         return null;
     }
 
+    public void removeCard(int index){
+        if(index <= cards.size())
+            cards.remove(index);
+    }
+
     public Card getCard(int index){
         if(index < 0 || index > cards.size())
             return null;

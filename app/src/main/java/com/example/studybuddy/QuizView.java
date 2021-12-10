@@ -33,8 +33,13 @@ public class QuizView extends AppCompatActivity {
 
     }
     public void nextCard(View view){
-        currentCard = set.getCard(currentCardIndex + 1);
-        displayCard();
+        if(currentCardIndex == set.getSize()-1)
+            currentCardIndex = 0;
+        else if(set.getSize() != 1)
+            currentCardIndex++;
+        //setName = setList.get(displayIndex);
+        //TextView t = findViewById(R.id.currentSet);
+        //t.setText(setName);
     }
     public void removeCard(View view){
         //set.remove(currentCardIndex);

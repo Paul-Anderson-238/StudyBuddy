@@ -77,6 +77,10 @@ public class EditCardView extends AppCompatActivity {
         if(set == null)
             set = new CardSet(setName);
 
+        //If there are no cards, default to creating a new card view
+        if (set.getSize() == 0)
+            createNewCard(null);
+
         //sets the currentCardIndex to 0, starts on the first card if it exists
         currentCardIndex = 0;
 

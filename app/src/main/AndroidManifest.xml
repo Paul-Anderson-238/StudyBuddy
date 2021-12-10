@@ -15,6 +15,7 @@
             android:exported="false" />
         <activity
             android:name=".QuizView"
+            android:parentActivityName=".QuizMenu"
             android:exported="false" />
         <activity
             android:name=".EditCardView"

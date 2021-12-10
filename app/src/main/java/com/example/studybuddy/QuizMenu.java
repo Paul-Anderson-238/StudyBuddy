@@ -45,7 +45,7 @@ public class QuizMenu extends AppCompatActivity {
         else if(setList.size()!= 1)
             displayIndex--;
         setName = setList.get(displayIndex);
-        TextView t = findViewById(R.id.currentSet);
+        TextView t = findViewById(R.id.currentSetName);
         t.setText(setName);
     }
 
@@ -55,7 +55,7 @@ public class QuizMenu extends AppCompatActivity {
         else if(setList.size() != 1)
             displayIndex++;
         setName = setList.get(displayIndex);
-        TextView t = findViewById(R.id.currentSet);
+        TextView t = findViewById(R.id.currentSetName);
         t.setText(setName);
     }
 

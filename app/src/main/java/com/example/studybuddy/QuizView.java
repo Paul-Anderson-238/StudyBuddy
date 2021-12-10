@@ -19,7 +19,8 @@ public class QuizView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_view);
-        
+
+
         //Name of Set we'll need from the incoming intent to read each card in the list
         Intent intent = getIntent();
         Gson gson = new Gson();
@@ -46,5 +47,4 @@ public class QuizView extends AppCompatActivity {
     public void flipCard(){
 
     }
-
 }

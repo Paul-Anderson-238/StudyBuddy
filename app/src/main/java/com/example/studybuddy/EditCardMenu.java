@@ -38,8 +38,6 @@ public class EditCardMenu extends AppCompatActivity {
         setContentView(R.layout.activity_edit_card_menu);
         loadList();
         displayIndex = 0;
-        if(setList == null)
-            setList = new ArrayList<>();
         if(setList.size() != 0){
             setName = setList.get(displayIndex);
             TextView t = findViewById(R.id.currentSet);
@@ -50,7 +48,10 @@ public class EditCardMenu extends AppCompatActivity {
     public void loadList() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
-        setList.addAll(set);
+        if (set != null)
+            setList.addAll(set);
+        else
+            setList = new ArrayList<>();
     }
 
     //Create Intent to connect pass set list to edit card view. See main, pass the set name we are trying to edit.
@@ -107,8 +108,7 @@ public class EditCardMenu extends AppCompatActivity {
                     SharedPreferences.Editor edit = sharedpreferences.edit();
                     setList.add(setName);
 
-                    Set<String> s = new HashSet<>();
-                    s.addAll(setList);
+                    Set<String> s = new HashSet<>(setList);
 
                     edit.putStringSet("SETLIST", s);
                     edit.apply();

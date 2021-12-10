@@ -21,17 +21,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class EditCardView extends AppCompatActivity {
-    static final String setlist = "SETLIST";
     String filename;
+    String setName;
     CardSet set;
     Card currentCard;
     int currentCardIndex;
 
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    private EditText newFront, newBack;
-    private Button saveButton, cancelButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +39,13 @@ public class EditCardView extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
 
-
-        //decodes the incoming Json into a Cardset, or nothing if the file doesn't exist
-        String cards = null;
-        String setName = intent.getStringExtra("setname");
-
         //Displays the name of the set
+        setName = intent.getStringExtra("setname");
         TextView t = findViewById(R.id.setName);
         t.setText(setName);
 
         //Begins decoding the file
         filename = setName + ".txt";
-
         FileInputStream fis = null;
 
         try {
@@ -84,30 +76,27 @@ public class EditCardView extends AppCompatActivity {
         }
 
         //If the set doesn't currently exist
-        if(cards == null){
+        if(set.getSize() == 0)
             set = new CardSet(setName);
-        }
 
-        //defaults the view to the current card. displays proper set name
+        //sets the currentCardIndex to 0, starts on the first card if it exists
         currentCardIndex = 0;
-        TextView text = (TextView) findViewById(R.id.setName);
-        text.setText(setName);
 
         //displays the first card if there is a first card
         if (set.getSize() > 0){
-            Card temp = set.getCard(currentCardIndex);
+            currentCard = set.getCard(currentCardIndex);
             EditText edit = (EditText) findViewById(R.id.cardFront);
-            edit.setText(temp.getFront());
+            edit.setText(currentCard.getFront());
             edit = (EditText) findViewById(R.id.cardBack);
-            edit.setText(temp.getBack());
+            edit.setText(currentCard.getBack());
         }
     }
 
     public void nextCard(View view){
         //save current card
-        EditText editor = (EditText) findViewById(R.id.cardFront);
+        EditText editor = findViewById(R.id.cardFront);
         String front = editor.getText().toString();
-        editor = (EditText) findViewById(R.id.cardBack);
+        editor = findViewById(R.id.cardBack);
         String back = editor.getText().toString();
         Card t = new Card(front, back);
         set.replace(currentCardIndex, t);
@@ -125,9 +114,9 @@ public class EditCardView extends AppCompatActivity {
 
     public void prevCard(View view){
         //save current card
-        EditText editor = (EditText) findViewById(R.id.cardFront);
+        EditText editor = findViewById(R.id.cardFront);
         String front = editor.getText().toString();
-        editor = (EditText) findViewById(R.id.cardBack);
+        editor = findViewById(R.id.cardBack);
         String back = editor.getText().toString();
         Card t = new Card(front, back);
         set.replace(currentCardIndex, t);
@@ -171,10 +160,8 @@ public class EditCardView extends AppCompatActivity {
         //Code for creating a Popup window to add a new card. The dialog stuff creates the view
         dialogBuilder = new AlertDialog.Builder(this);
         final View cardPopupView = getLayoutInflater().inflate(R.layout.addcardpopup, null);
-        newFront = (EditText) cardPopupView.findViewById(R.id.newFront);
-        newBack = (EditText) cardPopupView.findViewById(R.id.newBack);
-        saveButton = (Button) cardPopupView.findViewById(R.id.saveButton);
-        cancelButton = (Button) cardPopupView.findViewById(R.id.cancelButton);
+        Button saveButton = cardPopupView.findViewById(R.id.saveButton);
+        Button cancelButton = cardPopupView.findViewById(R.id.cancelButton);
 
         dialogBuilder.setView(cardPopupView);
         dialog = dialogBuilder.create();
@@ -184,9 +171,9 @@ public class EditCardView extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editor = (EditText) cardPopupView.findViewById(R.id.newFront);
+                EditText editor = cardPopupView.findViewById(R.id.newFront);
                 String front = editor.getText().toString();
-                editor = (EditText) cardPopupView.findViewById(R.id.newBack);
+                editor = cardPopupView.findViewById(R.id.newBack);
                 String back = editor.getText().toString();
                 set.addCard(front, back);
                 Toast.makeText(getApplicationContext(), "Saved Card", Toast.LENGTH_SHORT).show();

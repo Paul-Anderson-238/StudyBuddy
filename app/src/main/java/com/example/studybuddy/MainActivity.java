@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
     public void loadList(){
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
-        for (String x : set)
-            setList.add(x);
+        if (set != null)
+            setList.addAll(set);
+        else
+            setList = new ArrayList<>();
     }
     public void Quiz(View view){
         Intent intent = new Intent(this, QuizView.class);

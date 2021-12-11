@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,27 +83,20 @@ public class QuizView extends AppCompatActivity {
         if(set == null)
             set = new CardSet(setName);
     }
-
-    public void nextCard(View view){
-        if(currentCardIndex == set.getSize()-1)
-            currentCardIndex = 0;
-        else if(set.getSize() != 1)
-            currentCardIndex++;
-        currentCard = set.getCard(currentCardIndex);
-        displayCard();
-
-    }
-    public void removeCard(View view){
+    public void removeCard(){
         set.removeCard(currentCardIndex);
     }
     void displayCard() {
         TextView e = findViewById(R.id.cFront);
         e.setText(currentCard.getFront());
     }
-    public void flipCard(View view){
+
+    public void flipCard(View view) {
         //Code for creating a Popup window to add a new card. The dialog stuff creates the view
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         final View backPopupView = getLayoutInflater().inflate(R.layout.backofcardpopup, null);
+        TextView backOfCard = backPopupView.findViewById(R.id.cBack);
+        backOfCard.setText(currentCard.getBack());
         Button passCard = backPopupView.findViewById(R.id.passButton);
         Button retryCard = backPopupView.findViewById(R.id.retryButton);
 
@@ -112,17 +104,15 @@ public class QuizView extends AppCompatActivity {
         AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        //Saves the new card
+        //Puts card back into quiz list
         retryCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(getApplicationContext(), "Putting Card Back in Set", Toast.LENGTH_SHORT).show();
+                removeCard();
+                set.addCard(currentCard);
+                currentCard = set.getCard(0);
                 dialog.dismiss();
-
-                currentCard = set.getCard(set.getSize()-1);
-                currentCardIndex = set.getSize()-1;
-                displayCard();
             }
         });
 
@@ -131,8 +121,20 @@ public class QuizView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Nice Work!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                removeCard();
+                if (set.getSize() == 0) {
+                    Toast.makeText( getApplicationContext(), "Congratulations!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    dialog.dismiss();
+                    startActivity(intent);
+                }
+                else {
+                    currentCard = set.getCard(0);
+                    displayCard();
+                    dialog.dismiss();
+                }
             }
         });
     }
-    }
+
+}

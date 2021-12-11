@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/backOfCard"
+        android:id="@+id/cBack"
         android:layout_width="246dp"
         android:layout_height="171dp"
         android:layout_marginTop="220dp"
-        android:text="Back of Card"
+        android:text="TextView"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
         android:backgroundTint="#4CAF50"
         android:text="Pass"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backOfCard" />
+        app:layout_constraintTop_toBottomOf="@+id/cBack" />
 
     <Button
         android:id="@+id/retryButton"
@@ -38,5 +38,5 @@
         android:backgroundTint="#930000"
         android:text="Retry"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backOfCard" />
+        app:layout_constraintTop_toBottomOf="@+id/cBack" />
 </androidx.constraintlayout.widget.ConstraintLayout>

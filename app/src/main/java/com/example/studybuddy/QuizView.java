@@ -37,15 +37,16 @@ public class QuizView extends AppCompatActivity {
 
         //Check to make sure there is at least one card in the set
         if(set.getSize() == 0){
-            intent = new Intent(this, QuizMenu.class);
+            Intent i = new Intent(this, QuizMenu.class);
             Toast.makeText(this, "ERROR: MUST HAVE AT LEAST ONE CARD IN SET", Toast.LENGTH_LONG).show();
-            startActivity(intent);
+            startActivity(i);
         }
-
-        //Shuffle the cards and set the display to the new first card
-        set.randomizeCards();
-        currentCard = set.getCard(0);
-        displayCard();
+        else {
+            //Shuffle the cards and set the display to the new first card
+            set.randomizeCards();
+            currentCard = set.getCard(0);
+            displayCard();
+        }
     }
 
     public void readFile(){

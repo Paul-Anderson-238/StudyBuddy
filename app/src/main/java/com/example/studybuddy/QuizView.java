@@ -95,7 +95,7 @@ public class QuizView extends AppCompatActivity {
 
     }
     public void removeCard(View view){
-        //set.remove(currentCard);
+        set.removeCard(currentCardIndex);
     }
     void displayCard() {
         TextView e = findViewById(R.id.cFront);

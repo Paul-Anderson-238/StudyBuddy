@@ -8,30 +8,28 @@
 
     <ListView
         android:id="@+id/cardSets"
-        android:layout_width="409dp"
-        android:layout_height="345dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="385dp"
+        android:layout_width="408dp"
+        android:layout_height="591dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.319" />
 
     <Button
         android:id="@+id/quizView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="51dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginBottom="286dp"
+        android:layout_marginBottom="28dp"
         android:backgroundTint="#4CAF50"
         android:onClick="Quiz"
         android:text="Quiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editSets"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
 
@@ -40,9 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="51dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="286dp"
-        android:backgroundTint="#2196F3"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="28dp"
         android:onClick="EditSet"
         android:text="Edit Cards"
         app:layout_constraintBottom_toBottomOf="parent"

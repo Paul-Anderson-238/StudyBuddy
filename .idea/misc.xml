@@ -12,9 +12,12 @@
         <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/activity_edit_card_menu.xml" value="0.33" />
         <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/activity_edit_card_view.xml" value="0.33" />
         <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/activity_edit_cards.xml" value="0.20555555555555555" />
+        <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/activity_quiz_menu.xml" value="0.33" />
         <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/activity_quiz_view.xml" value="0.25" />
+        <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/addcardpopup.xml" value="0.33" />
         <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/backofcardpopup.xml" value="0.29074074074074074" />
+        <entry key="..\:/Users/vikin/AndroidStudioProjects/StudyBuddy/app/src/main/res/layout/newsetpopup.xml" value="0.5" />
       </map>
     </option>
   </component>

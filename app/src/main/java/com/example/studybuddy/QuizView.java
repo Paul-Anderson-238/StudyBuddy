@@ -1,9 +1,11 @@
 package com.example.studybuddy;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,7 +101,38 @@ public class QuizView extends AppCompatActivity {
         TextView e = findViewById(R.id.cFront);
         e.setText(currentCard.getFront());
     }
-    public void flipCard(){
+    public void flipCard(View view){
+        //Code for creating a Popup window to add a new card. The dialog stuff creates the view
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        final View backPopupView = getLayoutInflater().inflate(R.layout.backofcardpopup, null);
+        Button passCard = backPopupView.findViewById(R.id.passButton);
+        Button retryCard = backPopupView.findViewById(R.id.retryButton);
 
+        dialogBuilder.setView(backPopupView);
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        //Saves the new card
+        retryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(), "Putting Card Back in Set", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+                currentCard = set.getCard(set.getSize()-1);
+                currentCardIndex = set.getSize()-1;
+                displayCard();
+            }
+        });
+
+        //deletes the new card
+        passCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Nice Work!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
     }
     }

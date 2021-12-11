@@ -6,94 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".QuizView">
 
-    <Button
-        android:id="@+id/cNext"
-        android:layout_width="40dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="174dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="511dp"
-        android:onClick="nextCard"
-        android:text=">"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cFront"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/cFront"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="184dp"
-        android:layout_marginEnd="177dp"
-        android:layout_marginBottom="528dp"
-        android:onClick="flipCard"
+        android:layout_width="222dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="244dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/cMain"
+        android:id="@+id/flipCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="247dp"
-        android:layout_marginTop="162dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="301dp"
-        android:onClick="mainMenu"
-        android:text="Main Menu"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#009688"
+        android:onClick="flipCard"
+        android:text="Flip Card"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cNext" />
+        app:layout_constraintTop_toBottomOf="@+id/cFront" />
 
     <Button
         android:id="@+id/removeCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginTop="76dp"
+        android:backgroundTint="#930000"
         android:onClick="removeCard"
         android:text="Remove"
-        app:layout_constraintBottom_toTopOf="@+id/cMain"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cFront" />
-
-    <TextView
-        android:id="@+id/numberOfCards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginBottom="339dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/cMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/flipCard" />
 
     <Button
         android:id="@+id/cHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="386dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginBottom="297dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="44dp"
+        android:backgroundTint="#00BCD4"
         android:text="Hint"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cMain"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/removeCard"
+        app:layout_constraintHorizontal_bias="0.989"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/flipCard" />
+
+    <Button
+        android:id="@+id/cNext"
+        android:layout_width="40dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:onClick="nextCard"
+        android:text=">"
+        app:layout_constraintStart_toEndOf="@+id/cFront"
+        app:layout_constraintTop_toTopOf="@+id/cFront" />
+
+    <Button
+        android:id="@+id/cMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="216dp"
+        android:onClick="mainMenu"
+        android:text="Main Menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cFront" />
+
+    <TextView
+        android:id="@+id/numberOfCards"
+        android:layout_width="62dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@
         android:id="@+id/backOfCard"
         android:layout_width="246dp"
         android:layout_height="171dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginTop="220dp"
         android:text="Back of Card"
         android:textAlignment="center"
         android:textSize="16sp"
@@ -19,21 +19,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/passButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#4CAF50"
         android:text="Pass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backOfCard" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/retryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#930000"
         android:text="Retry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backOfCard" />

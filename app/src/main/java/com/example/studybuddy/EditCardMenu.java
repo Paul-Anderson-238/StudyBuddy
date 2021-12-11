@@ -31,6 +31,7 @@ public class EditCardMenu extends AppCompatActivity {
     Button saveNewSet;
 
     @Override
+    //Creates the view for the Edit Card Menu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card_menu);
@@ -43,6 +44,7 @@ public class EditCardMenu extends AppCompatActivity {
         }
     }
 
+    //Loads the list of user created card sets
     public void loadList() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
@@ -56,6 +58,7 @@ public class EditCardMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //A popup view to create a new set to where the user can enter in a new card set name and save it to a file
     public void createNewSet(View view) {
         dialogBuilder = new AlertDialog.Builder(this);
         final View newSetPopupView = getLayoutInflater().inflate(R.layout.newsetpopup, null);
@@ -115,6 +118,7 @@ public class EditCardMenu extends AppCompatActivity {
         });
     }
 
+    //Takes the user to the previous card set and displays it on the screen
     public void prevSetName(View view){
         if(displayIndex == 0)
             displayIndex = setList.size()-1;
@@ -125,6 +129,7 @@ public class EditCardMenu extends AppCompatActivity {
         t.setText(setName);
     }
 
+    //Takes the user to the next card set and displays it on the screen
     public void nextSetName(View view){
         if(displayIndex == setList.size()-1)
             displayIndex = 0;

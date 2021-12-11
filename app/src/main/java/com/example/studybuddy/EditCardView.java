@@ -26,6 +26,7 @@ public class EditCardView extends AppCompatActivity {
     Card currentCard;
     int currentCardIndex;
 
+    //Creates the view for the Edit Card View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +91,7 @@ public class EditCardView extends AppCompatActivity {
         }
     }
 
+    //Goes to the next card
     public void nextCard(View view){
         //save current card
         EditText editor = findViewById(R.id.cardFront);
@@ -110,6 +112,7 @@ public class EditCardView extends AppCompatActivity {
         displayCard();
     }
 
+    //Returns to previous card
     public void prevCard(View view){
         //save current card
         EditText editor = findViewById(R.id.cardFront);
@@ -130,6 +133,7 @@ public class EditCardView extends AppCompatActivity {
         displayCard();
     }
 
+    //Saves the set of cards and puts them into a file in internal storage
     public void saveSet(View view){
         FileOutputStream fos = null;
         Gson gson = new Gson();
@@ -189,6 +193,7 @@ public class EditCardView extends AppCompatActivity {
         });
     }
 
+    //Displays the front and back of the cards
     void displayCard(){
         EditText e = findViewById(R.id.cardFront);
         e.setText(currentCard.getFront());

@@ -19,7 +19,7 @@ public class QuizMenu extends AppCompatActivity {
     int displayIndex;
 
     TextView currentSetName;
-
+    //Creates the view for the Quiz Menu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +33,14 @@ public class QuizMenu extends AppCompatActivity {
         }
     }
 
+    //Loads the list of card sets to quiz through
     public void loadList() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHAREDPREF", MODE_PRIVATE);
         Set<String> set = sharedPreferences.getStringSet("SETLIST", new HashSet<>());
         setList = new ArrayList<>(set);
     }
 
+    //Goes to the previous set in the quiz card set list
     public void prevSetName(View view){
         if(displayIndex == 0)
             displayIndex = setList.size()-1;
@@ -49,6 +51,7 @@ public class QuizMenu extends AppCompatActivity {
         t.setText(setName);
     }
 
+    //Goes to the next set in the quiz card set list
     public void nextSetName(View view){
         if(displayIndex == setList.size()-1)
             displayIndex = 0;
@@ -59,6 +62,7 @@ public class QuizMenu extends AppCompatActivity {
         t.setText(setName);
     }
 
+    //Takes the user to the quiz view to take a quiz on the selected card set
     public void takeQuiz (View view){
         Intent intent = new Intent(this, QuizView.class);
         intent.putExtra("setname", setName);

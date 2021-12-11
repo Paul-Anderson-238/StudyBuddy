@@ -90,12 +90,12 @@ public class QuizView extends AppCompatActivity {
             currentCardIndex = 0;
         else if(set.getSize() != 1)
             currentCardIndex++;
-        //setName = setList.get(displayIndex);
-        //TextView t = findViewById(R.id.currentSet);
-        //t.setText(setName);
+        currentCard = set.getCard(currentCardIndex);
+        displayCard();
+
     }
     public void removeCard(View view){
-        //set.remove(currentCardIndex);
+        //set.remove(currentCard);
     }
     void displayCard() {
         TextView e = findViewById(R.id.cFront);
